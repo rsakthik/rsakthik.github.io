@@ -628,23 +628,19 @@
          }
       }
 
-      .landing__title,
+      /* .landing__title,
       .content__title,
       .services__title {
-         /* Fallback for older browsers */
          color: var(--theme);
 
-         /* Modern gradient text */
          background: linear-gradient(to bottom, #fff, var(--theme));
          -webkit-background-clip: text;
          background-clip: text;
          -webkit-text-fill-color: transparent;
          text-fill-color: transparent;
 
-         /* Ensure proper rendering */
          display: inline-block;
-         /* or block depending on context */
-      }
+      } */
    </style>
 </head>
 
@@ -851,6 +847,34 @@
          lenis.raf(time * 1000);
       });
       gsap.ticker.lagSmoothing(0);
+
+      document.onkeydown = function (e) {
+         if (e.keyCode == 123) {
+            return false;
+         }
+         if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+            return false;
+         }
+         if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+            return false;
+         }
+         if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+            return false;
+         }
+
+         if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+            return false;
+         }
+      }
+
+      var message = "function disabled";
+      function rtclickcheck(keyp) {
+         // if (navigator.appName == "Netscape" && keyp.which == 3) { alert(message); return false; }
+         // if (navigator.appVersion.indexOf("MSIE") != -1 && event.button == 2) { alert(message); return false; }
+         if (navigator.appName == "Netscape" && keyp.which == 3) { alert(message); return false; }
+         if (navigator.appVersion.indexOf("MSIE") != -1 && event.button == 2) { alert(message); return false; }
+      }
+      document.onmousedown = rtclickcheck;
    </script>
    {% raw %}
    <script src="https://cdn.botpress.cloud/webchat/v2.3/inject.js"></script>
