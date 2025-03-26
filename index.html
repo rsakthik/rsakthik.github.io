@@ -867,14 +867,33 @@
          }
       }
 
+      // var message = "function disabled";
+      // function rtclickcheck(keyp) {
+      //    // if (navigator.appName == "Netscape" && keyp.which == 3) { alert(message); return false; }
+      //    // if (navigator.appVersion.indexOf("MSIE") != -1 && event.button == 2) { alert(message); return false; }
+      //    if (navigator.appName == "Netscape" && keyp.which == 3) { console.log('not allowed'); return false; }
+      //    if (navigator.appVersion.indexOf("MSIE") != -1 && event.button == 2) { console.log('not allowed'); return false; }
+      // }
+      // document.onmousedown = rtclickcheck;
+
       var message = "function disabled";
-      function rtclickcheck(keyp) {
-         // if (navigator.appName == "Netscape" && keyp.which == 3) { alert(message); return false; }
-         // if (navigator.appVersion.indexOf("MSIE") != -1 && event.button == 2) { alert(message); return false; }
-         if (navigator.appName == "Netscape" && keyp.which == 3) { return false; }
-         if (navigator.appVersion.indexOf("MSIE") != -1 && event.button == 2) { return false; }
+
+      function rtclickcheck(event) {
+         event = event || window.event;
+         if (event.which == 3) { // Modern browsers (Chrome, Firefox, etc.)
+            console.log('not allowed');
+            return false;
+         }
+         if (event.button == 2) { // Older IE versions
+            console.log('not allowed');
+            return false;
+         }
       }
-      document.onmousedown = rtclickcheck;
+
+      document.addEventListener("contextmenu", function (event) {
+         event.preventDefault(); // Prevents the default right-click menu
+         rtclickcheck(event);
+      });
    </script>
    {% raw %}
    <script src="https://cdn.botpress.cloud/webchat/v2.3/inject.js"></script>
